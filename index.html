@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 Task 2: Ticket Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js" type="text/javascript"></script>
+    
+    <style>
+        :root {
+            --primary-title: #007BA6;
+            --keyword-color: #C62828;
+            --instruction-color: #00796B;
+            --bg-color: #f9fbfd;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 { color: var(--primary-title); border-bottom: 3px solid var(--primary-title); padding-bottom: 10px; }
+        h2 { color: var(--primary-title); font-size: 20px; margin-top: 25px; }
+
+        .instruction-box {
+            background-color: #e0f2f1;
+            border-left: 6px solid var(--instruction-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .instruction-box p { margin: 0; color: var(--instruction-color); font-weight: 600; }
+
+        .keyword { color: var(--keyword-color); font-weight: bold; background-color: #ffebee; padding: 2px 6px; border-radius: 4px; }
+
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background: var(--primary-title);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .ide-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 320px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #64748b;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .run-btn {
+            background-color: var(--instruction-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .run-btn:hover { background-color: #005b51; }
+
+        .console-output {
+            background-color: #000000;
+            color: #22c55e;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Independent Application: Theme Park Ticket Calculator</h1>
+    
+    <div class="instruction-box">
+        <p>⏱️ TIME LIMIT: 30 Minutes. Your task is to fix a broken price calculator by changing the data types. Read the instructions step-by-step.</p>
+    </div>
+
+    <h2>The Problem</h2>
+    <p>A theme park wants an app to calculate total ticket costs. However, because the computer treats user inputs as text (<span class="keyword">String</span> data), the math engine is failing. You need to convert the text inputs into numbers so the calculations work!</p>
+
+    <div class="step-card">
+        <span class="step-number">STEP 1</span>
+        <p><span class="keyword">Instruction:</span> Look at line 5 inside the editor. The variable <code>tickets_text</code> is a String. Use the <code>int()</code> function to convert it into an <span class="keyword">Integer</span> (whole number). Store it inside <code>ticket_count</code>.</p>
+    </div>
+
+    <div class="step-card">
+        <span class="step-number">STEP 2</span>
+        <p><span class="keyword">Instruction:</span> Look at line 9. The variable <code>price_text</code> has numbers with a decimal point. Use the <code>float()</code> function to convert it into a <span class="keyword">Real</span> number. Store it inside <code>ticket_price</code>.</p>
+    </div>
+
+    <div class="step-card">
+        <span class="step-number">STEP 3</span>
+        <p><span class="keyword">Instruction:</span> Look at line 13. Calculate the total cost by multiplying <code>ticket_count</code> by <code>ticket_price</code> using the asterisk symbol (<code>*</code>). Store the result inside <code>total_cost</code>.</p>
+    </div>
+
+    <div class="step-card">
+        <span class="step-number">STEP 4</span>
+        <p><span class="keyword">Instruction:</span> Look at line 17. The park wants to check if the user is buying more than 5 tickets to give them a discount. Change <code>group_discount</code> to the <span class="keyword">Boolean</span> value <code>True</code> if ticket_count is greater than 5, otherwise leave it as <code>False</code>.</p>
+    </div>
+
+    <h2>Your Coding Workspace</h2>
+    <div class="instruction-box">
+        <p>🖥️ INSTRUCTION: Work directly inside the code box below. When you want to see if your program calculates correctly, click the green "⚡ Run My Code" button.</p>
+    </div>
+
+    <div class="ide-grid">
+        <textarea id="yourcode" cols="40" rows="10" spellcheck="false"># --- DATA INPUTS (Pre-set text strings) ---
+tickets_text = "6"
+price_text = "12.50"
+
+# STEP 1: Convert tickets_text into an Integer (whole number)
+ticket_count = 
+
+# STEP 2: Convert price_text into a Real / Float number (decimal)
+ticket_price = 
+
+# STEP 3: Multiply ticket_count by ticket_price
+total_cost = 
+
+# STEP 4: Change this to the Boolean value True if ticket_count is greater than 5
+group_discount = False
+
+
+# --- CONSOLE OUTPUT SYSTEM (Do not change code below this line) ---
+print("--- TICKET RECEIPT ---")
+try: print("Number of tickets: " + str(ticket_count) + " (" + str(type(ticket_count).__name__) + ")")
+except: print("Number of tickets: [Error / Not built yet]")
+try: print("Price per ticket: £" + str(ticket_price) + " (" + str(type(ticket_price).__name__) + ")")
+except: print("Price per ticket: [Error / Not built yet]")
+try: print("Total Bill: £" + str(total_cost))
+except: print("Total Bill: [Error / Not built yet]")
+try: print("Qualifies for Group Discount: " + str(group_discount) + " (" + str(type(group_discount).__name__) + ")")
+except: print("Qualifies for Group Discount: [Error / Not built yet]")
+</textarea>
+        
+        <div>
+            <button class="run-btn" type="button" onclick="runPython()">⚡ Run My Code</button>
+        </div>
+
+        <h3>Console Terminal Output:</h3>
+        <div class="console-output" id="output">Outputs will appear here when you run your code...</div>
+    </div>
+
+</div>
+
+<script type="text/javascript"> 
+    function outf(text) { 
+        var mypre = document.getElementById("output"); 
+        mypre.innerHTML = mypre.innerHTML + text; 
+    } 
+    function builtinRead(x) {
+        if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+        return Sk.builtinFiles["files"][x];
+    }
+
+    function runPython() { 
+       var program = document.getElementById("yourcode").value; 
+       var mypre = document.getElementById("output"); 
+       mypre.innerHTML = ''; 
+       Sk.pre = "output";
+       Sk.configure({output:outf, read:builtinRead}); 
+       var myPromise = Sk.misceval.asyncToPromise(function() {
+           return Sk.importMainWithBody("<stdin>", false, program, true);
+       });
+       myPromise.then(function(mod) {
+           // Success path
+       },
+       function(err) {
+           document.getElementById("output").innerHTML = "❌ SYSTEM ERROR:\n" + err.toString();
+       });
+    } 
+</script>
+
+</body>
+</html>
